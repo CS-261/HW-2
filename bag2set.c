@@ -8,23 +8,21 @@
 /* Converts the input bag into a set using dynamic arrays 
 	param: 	da -- pointer to a bag 	
 	return value: void
-        result: after exiting the function da points to a set 		
+        result: after exiting the function da points to a set	
 */
 void bag2set(struct DynArr *da)
 {
     
      /* FIX ME */
-    struct  DynArr* set = (struct DynArr*)malloc(sizeof(DynArr));
-    int i;
-    for(i = 0; i < da->size; i++) {
-        if(containsDynArr(set, da->data[i]) == -1) addDynArr(set, da->data[i]);
-    }
-    
-
-    freeDynArr(da);
-    free(da);
-
-    da = set;
+     int i, j;
+     for(i = 0; i < da->size - 1; i++) {
+             for(j = i + 1; j < da->size; j++) {
+                     if(da->data[i] == da->data[j]) {
+                             removeAtDynArr(da, j);
+                             i--;
+                     }
+             }
+     }
 
 }
 
@@ -56,6 +54,8 @@ int main(int argc, char* argv[]){
           printf("%g ", da.data[i]);
         }
         printf("\n");
+
+        freeDynArr(&da);
         
 	return 0;	
 }

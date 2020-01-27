@@ -18,7 +18,7 @@
 */
 void initDynArr(DynArr *v, int capacity)
 {
-	v->data = (TYPE *) malloc(sizeof(TYPE) * capacity);
+	v->data = (TYPE *)malloc(sizeof(TYPE) * capacity);
 	assert(v->data != 0);
 	
 	v->size = 0;

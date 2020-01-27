@@ -41,7 +41,6 @@ int isBalanced(char* s)
 	DynArr *stack;
 	stack=newDynArr(100);/* initialize the stack with capacity = 100 */
 
-
 	if (s && strlen(s))
 		while(1) /*infinite loop that has to be stopped explicitly*/
 		{
@@ -49,26 +48,44 @@ int isBalanced(char* s)
 			
                         /*stop the while loop when we reach the end of the string*/
 			if(ch==0 || ch=='\0') break;
-				 
  
                         /* FIXME: You will write this part of the function */
-
+			if(ch == ')') {
+				if(isEmptyDynArr(stack) || topDynArr(stack) != '(') {
+					b = 1;
+					break;
+				} else popDynArr(stack);
+			} else if(ch == ']') {
+				if(isEmptyDynArr(stack) || topDynArr(stack) != '[') {
+					b = 1;
+					break;
+				} else popDynArr(stack);
+			} else if(ch == '}') {
+				if(isEmptyDynArr(stack) || topDynArr(stack) != '{') {
+					b = 1;
+					break;
+				} else popDynArr(stack);
+			} else if(ch == '(' || ch == '[' || ch == '{')  pushDynArr(stack, ch);
+					
 		}
-
 
         /* Free the memory allocated to the stack, and return b=1 or b=0 */
 
 	/* FIXME: You will write this part of the function */
+
+	b = isEmptyDynArr(stack) && ch != ')' && ch != ']' && ch != '}';
+
+	freeDynArr(stack);
+	free(stack);
+
+	return b;
 
 }
 
 int main(int argc, char* argv[]){
 
 	char* s=argv[1];	
-	/*
-	char s[]="()+x+r*{{{((--{{[()[]]}}))}}}";	
-	*/
-
+		
 	int res;
 
 	printf("Assignment 2\n");
